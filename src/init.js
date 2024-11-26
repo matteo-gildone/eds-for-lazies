@@ -54,6 +54,7 @@ export async function initializeProject() {
 		const packageJson = await fs.readJson('package.json');
 		const updatedPackageJson = {
 			...packageJson,
+			'type': 'module',
 			scripts: {...packageJson.scripts, ...projectConfig.scripts}
 		};
 
