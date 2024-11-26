@@ -84,14 +84,14 @@ async function setupFeature(feature, projectConfig) {
 
 	switch (feature) {
 		case 'sass':
-			projectConfig.scripts['sass:build'] = 'sass --load-path=\'./node_modules\' src/styles:public/css --style compressed';
-			projectConfig.scripts['sass:watch'] = 'sass --load-path=\'./node_modules\' src/styles:public/css --watch';
+			projectConfig.scripts['sass:build'] = 'sass --load-path=\'./node_modules\' assets/scss:public/css --style compressed';
+			projectConfig.scripts['sass:watch'] = 'sass --load-path=\'./node_modules\' assets/scss:public/css --watch';
 			projectConfig.devDependencies.sass = '^1.81.0';
 			projectConfig.devDependencies['@springernature/elements'] = '^0.0.1-alpha.14';
 
 			// Create styles directory and copy template files
-			await fs.ensureDir('assets/styles');
-			await fs.copy(templatePath, 'assets/styles', {overwrite: false});
+			await fs.ensureDir('assets/scss');
+			await fs.copy(templatePath, 'assets/scss', {overwrite: false});
 			break;
 
 		case 'javascript':
