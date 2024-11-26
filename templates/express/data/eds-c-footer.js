@@ -74,7 +74,7 @@ const edsCFooterData = {
 		"alt": "Springer Nature",
 		"link": "https://www.springernature.com/"
 	},
-	"currentYear": 2023,
+	"currentYear": 2024,
 	"productFooter": "productFooter",
 	"corporateFooter": "corporateFooter",
 	"productGroups": [
