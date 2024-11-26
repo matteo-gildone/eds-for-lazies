@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}}</title>
-    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" href="/img/favicons/favicon.svg">
     {{!-- <link href="/css/examples.css" rel="stylesheet"> --}}
     {{> styles}}
 
@@ -16,9 +16,12 @@
 <main style="padding-bottom: 48px">
     <div class="u-container">
         <h1>{{title}}</h1>
+        {{{body}}}
     </div>
-    {{{body}}}
 </main>
+{{#with eds-c-footer}}
+    {{> elements-components-templates/eds-c-foter/eds-c-footer }}
+{{/with}}
 {{> scripts}}
 </body>
 </html>

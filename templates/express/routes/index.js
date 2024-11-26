@@ -15,7 +15,7 @@ const data = {
 router.get('/', (request, res) => {
 	res.render('index', {
 		...data,
-		title: 'Home is where the CMS is'
+		title: 'Hi from DS for lazies team'
 	});
 });
 
