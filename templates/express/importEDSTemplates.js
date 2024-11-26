@@ -1,8 +1,8 @@
-import {join} from 'node:path';
-import fs from "fs-extra";
-import path from "node:path";
-import {fileURLToPath} from "node:url";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import {join, extname, relative, dirname} from 'node:path';
+import fs from 'fs-extra';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 const ELEMENTS_PACKAGE_PATH = join(__dirname, 'node_modules', '@springernature', 'elements', 'components');
@@ -18,15 +18,15 @@ async function copyHbsFilesRecursively(srcDir, destDir) {
 			const entries = await fs.readdir(dir, { withFileTypes: true });
 
 			for (const entry of entries) {
-				const entryPath = path.join(dir, entry.name);
+				const entryPath = join(dir, entry.name);
 
 				if (entry.isDirectory()) {
 					// If entry is a directory, recurse into it
 					await copyFiles(entryPath);
-				} else if (entry.isFile() && path.extname(entry.name) === '.hbs') {
+				} else if (entry.isFile() && extname(entry.name) === '.hbs') {
 					// If entry is a .hbs file, copy it
-					const relativePath = path.relative(srcDir, entryPath);
-					const destPath = path.join(destDir, relativePath);
+					const relativePath = relative(srcDir, entryPath);
+					const destPath = join(destDir, relativePath);
 
 					await fs.ensureDir(path.dirname(destPath)); // Ensure destination folder exists
 					await fs.copy(entryPath, destPath);
