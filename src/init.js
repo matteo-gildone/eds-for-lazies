@@ -1,11 +1,12 @@
 import pkg from 'enquirer';
-const {prompt} = pkg;
 import chalk from 'chalk';
 import ora from 'ora';
 import {execa} from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
 import {fileURLToPath} from 'url';
+
+const {prompt} = pkg;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -62,6 +63,9 @@ export async function initializeProject() {
 		spinner.text = 'Installing dependencies...';
 		const devDepsToInstall = Object.keys(projectConfig.devDependencies);
 		const depsToInstall = Object.keys(projectConfig.dependencies);
+
+		await execa('npm', ['install', '@springernature/elements']);
+
 		if (devDepsToInstall.length > 0) {
 			await execa('npm', ['install', '-D', ...devDepsToInstall]);
 		}
@@ -87,7 +91,7 @@ async function setupFeature(feature, projectConfig) {
 			projectConfig.scripts['sass:build'] = 'sass --load-path=\'./node_modules\' assets/scss:public/css --style compressed';
 			projectConfig.scripts['sass:watch'] = 'sass --load-path=\'./node_modules\' assets/scss:public/css --watch';
 			projectConfig.devDependencies.sass = '^1.81.0';
-			projectConfig.devDependencies['@springernature/elements'] = '^0.0.1-alpha.14';
+			projectConfig.dependencies['@springernature/elements'] = '^0.0.1-alpha.14';
 
 			// Create styles directory and copy template files
 			await fs.ensureDir('assets/scss');
@@ -103,6 +107,7 @@ async function setupFeature(feature, projectConfig) {
 		case 'rollup':
 			projectConfig.scripts.build = 'rollup -c';
 			projectConfig.scripts.watch = 'rollup -c -w';
+			projectConfig.dependencies['@springernature/elements'] = '^0.0.1-alpha.14';
 			projectConfig.devDependencies.rollup = '^4.27.4';
 			projectConfig.devDependencies['@rollup/plugin-babel'] = '^6.0.4';
 			projectConfig.devDependencies['@rollup/plugin-commonjs'] = '^28.0.1';
@@ -131,9 +136,11 @@ async function setupFeature(feature, projectConfig) {
 			break;
 
 		case 'express':
-			projectConfig.scripts['dev'] = 'npm run sass:build && npm run build && npm run elements:templates && node app.js';
-			projectConfig.scripts['elements:templates'] = 'node ./importEDSTemplate.js';
+			projectConfig.scripts['dev'] = 'npm run sass:build && npm run build && npm run move:templates && move:images && node app.js';
+			projectConfig.scripts['move:templates'] = 'node ./importEDSTemplate.js';
+			projectConfig.scripts['move:images'] = 'node ./moveImages.js';
 			projectConfig.dependencies['express'] = '^4.21.1';
+			projectConfig.dependencies['@springernature/elements'] = '^0.0.1-alpha.14';
 
 			// Copy ESLint config
 			await fs.copy(templatePath, '.', {overwrite: false});
