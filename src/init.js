@@ -19,7 +19,7 @@ export async function initializeProject() {
 			message: 'Select the features you want to set up:',
 			choices: [
 				{name: 'sass', message: 'Sass compilation'},
-				{name: 'javascript', message: 'JavaScript build (Rollup + Babel)'},
+				{name: 'rollup', message: 'Rollup + Babel configuration'},
 				{name: 'eslint', message: 'ESLint configuration'},
 				{name: 'express', message: 'Express App configuration'}
 			]
@@ -97,8 +97,7 @@ async function setupFeature(feature, projectConfig) {
 		case 'javascript':
 
 			// Copy Rollup and Babel config files
-			await fs.ensureDir('assets/js');
-			await fs.copy(`${templatePath}/.`, 'assets/js', {overwrite: false});
+
 			break;
 
 		case 'rollup':
@@ -110,6 +109,9 @@ async function setupFeature(feature, projectConfig) {
 			projectConfig.devDependencies['@rollup/plugin-node-resolve'] = '^15.3.0';
 			projectConfig.devDependencies['@babel/core'] = '^7.26.0';
 			projectConfig.devDependencies['@babel/preset-env'] = '^7.26.0';
+
+			await fs.ensureDir('assets/js');
+			await fs.copy(`${templatePath}/../javascript`, 'assets/js', {overwrite: false});
 
 			// Copy Rollup and Babel config files
 			await fs.copy(`${templatePath}`, '.', {overwrite: false});
