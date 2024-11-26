@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}}</title>
+    <link rel="icon" href="/img/favicon.ico">
+    {{!-- <link href="/css/examples.css" rel="stylesheet"> --}}
+    {{> styles}}
+
+</head>
+<body>
+{{#with eds-c-header}}
+    {{> elements-components-templates/eds-c-header/eds-c-header }}
+{{/with}}
+<main style="padding-bottom: 48px">
+    <div class="u-container">
+        <h1>{{title}}</h1>
+    </div>
+    {{{body}}}
+</main>
+{{> scripts}}
+</body>
+</html>

@@ -1,0 +1,14 @@
+<script>
+    /* https://github.com/springernature/frontend-playbook/blob/main/practices/graded-browser-support.md#implementation-details */
+    (function () {
+        var linkEl = document.getElementById('enhanced-stylesheet');
+        if (linkEl) {
+            if (window.matchMedia && window.matchMedia(linkEl.media).matches) {
+                var script = document.createElement('script');
+                script.src = '/js/bundle.js';
+                script.async = true;
+                document.body.appendChild(script);
+            }
+        }
+    })();
+</script>

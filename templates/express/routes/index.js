@@ -13,7 +13,7 @@ const data = {
 };
 
 router.get('/', (request, res) => {
-	res.render('home', {
+	res.render('index', {
 		...data,
 		title: 'Home is where the CMS is'
 	});
