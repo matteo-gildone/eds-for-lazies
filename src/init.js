@@ -129,7 +129,7 @@ async function setupFeature(feature, projectConfig) {
 			break;
 
 		case 'express':
-			projectConfig.scripts['dev'] = 'npm run elements:templates && node app.js';
+			projectConfig.scripts['dev'] = 'npm run sass:build && npm run build && npm run elements:templates && node app.js';
 			projectConfig.scripts['elements:templates'] = 'node ./importEDSTemplate.js';
 			projectConfig.dependencies['express'] = '^4.21.1';
 
