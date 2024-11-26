@@ -1,6 +1,9 @@
 // import the elements theme
 @import '@springernature/elements/themes/springernature/scss/enhanced';
 
+// import fonts
+@import './fonts';
+
 // import the elements components that the consumer application will need
 @import '@springernature/elements/components/eds-c-header';
 @import '@springernature/elements/components/eds-c-footer';

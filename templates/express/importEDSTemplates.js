@@ -30,7 +30,6 @@ async function copyHbsFilesRecursively(srcDir, destDir) {
 
 					await fs.ensureDir(path.dirname(destPath)); // Ensure destination folder exists
 					await fs.copy(entryPath, destPath);
-					console.log(`Copied: ${relativePath}`);
 				}
 			}
 		}

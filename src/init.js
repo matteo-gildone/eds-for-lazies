@@ -136,9 +136,10 @@ async function setupFeature(feature, projectConfig) {
 			break;
 
 		case 'express':
-			projectConfig.scripts['dev'] = 'npm run sass:build && npm run build && npm run move:templates && npm run move:images && node app.js';
+			projectConfig.scripts['dev'] = 'npm run sass:build && npm run move:fonts && npm run build && npm run move:templates && npm run move:images && node app.js';
 			projectConfig.scripts['move:templates'] = 'node ./importEDSTemplates.js';
 			projectConfig.scripts['move:images'] = 'node ./moveImages.js';
+			projectConfig.scripts['move:fonts'] = 'node ./moveFonts.js';
 			projectConfig.dependencies['fs-extra'] = '^11.2.0';
 			projectConfig.dependencies['express-handlebars'] = '^8.0.1';
 			projectConfig.dependencies['express'] = '^4.21.1';
